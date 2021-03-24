@@ -1,0 +1,52 @@
+* {
+  padding: 0;
+  margin: 0;
+  color: #ffffff; }
+
+body {
+  background: url(../images/earthquake.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; }
+  body .loading-screen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* Safari */ }
+    body .loading-screen .loader-wrap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%); }
+    body .loading-screen .loader {
+      text-align: center;
+      border: 12px solid #ffffff;
+      border-radius: 50%;
+      border-top: 12px solid transparent;
+      width: 50px;
+      height: 50px;
+      margin: 0 auto;
+      -webkit-animation: spin 1s linear infinite;
+      /* Safari */
+      animation: spin 1s linear infinite;
+      opacity: .5; }
+    body .loading-screen p {
+      color: #405464;
+      margin-top: 10px;
+      opacity: .5; }
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg); }
+  100% {
+    -webkit-transform: rotate(360deg); } }
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }

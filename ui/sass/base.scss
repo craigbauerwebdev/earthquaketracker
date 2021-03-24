@@ -1,0 +1,17 @@
+@import "variables.scss";
+
+.base {
+   h1 {
+       font-family: 'Abril Fatface', cursive;
+       text-align: center;
+       font-size: 50px;
+       letter-spacing: 1px;
+       line-height: 54px;
+       margin: 15px 0;
+   } 
+
+   h3 {
+       text-align: center;
+       margin: 30px 0;
+   }
+}
