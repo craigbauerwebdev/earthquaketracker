@@ -33,7 +33,7 @@ body {
       -webkit-animation: spin 1s linear infinite;
       /* Safari */
       animation: spin 1s linear infinite;
-      opacity: .5; }
+      opacity: 1; }
     body .loading-screen p {
       color: #405464;
       margin-top: 10px;

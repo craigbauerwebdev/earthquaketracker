@@ -1,17 +1,25 @@
 import {getDateString} from "../utils/getDateString";
+import {formatMag} from "../utils/formatMag";
 
 const Results = ({data}) => {
   console.log("Data: ", data);
   const getResults = (data) => {
-    return data.map(quake => {
-      return (
-        <tr key={quake.id}>
-          <td>{quake?.properties.mag}</td>
-          <td>{quake?.properties.place}</td>
-          <td>{getDateString(quake.properties.time)}</td>
-        </tr>
-      );
-    })
+    if (data) {
+      return data.slice(0,100).map(quake => {
+        return (
+          <tr key={quake.id}>
+            <td>{formatMag(quake?.properties.mag)}</td>
+            <td>{quake?.properties.place}</td>
+            <td>{getDateString(quake?.properties.time)}</td>
+          </tr>
+        );
+      })
+    }
+    return (
+      <tr>
+        <td>No Earthquages Matchd Your Search</td>
+      </tr>
+    );
   }
 
   return (
