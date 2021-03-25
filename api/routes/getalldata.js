@@ -4,10 +4,7 @@ var fetch = require('node-fetch');
 
 /* GET all earthquake data */
 router.get('/', (req, res, next) => {
-	const
-		all = process.env.BASE_URL,
-		filtered = `${process.env.BASE_URL}&starttime=2000-01-01&endtime=2020-01-02&minmagnitude=5&minmagnitude=1&latitude=37&longitude=100&maxradiuskm=200`;
-
+	const all = process.env.BASE_URL;
 	fetch(all)
 		.then((response) => {
 			return response.json();

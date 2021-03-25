@@ -4,7 +4,7 @@ var router = express.Router();
 var fetch = require('node-fetch');
 
 /* GET earthquakes based on user input */
-router.get('/', (req, res, next) => {
+router.get('/:mag', (req, res, next) => {
 //  /:starttime/:endtime
 	/* 
 	
@@ -12,8 +12,7 @@ router.get('/', (req, res, next) => {
 	console.log(req.params.song);
 	console.log(req.params.band);
 
-	### User Set Parameters
-	
+	### Possible User Set Parameters
 	https://earthquake.usgs.gov/fdsnws/event/1/query?
 		format=geojson&
 		starttime=2000-01-01&
@@ -25,9 +24,7 @@ router.get('/', (req, res, next) => {
 		maxradiuskm=200
 	*/
 
-	const
-		all = process.env.BASE_URL,
-		filtered = `${process.env.BASE_URL}&starttime=2000-01-01&endtime=2020-01-02&minmagnitude=5&minmagnitude=1&latitude=37&longitude=100&maxradiuskm=200`;
+	const filtered = `${process.env.BASE_URL}&starttime=2000-01-01&endtime=2020-01-02&minmagnitude=5&minmagnitude=${req.params.mag}&latitude=37&longitude=100&maxradiuskm=200`;
 
 
     fetch(filtered)
