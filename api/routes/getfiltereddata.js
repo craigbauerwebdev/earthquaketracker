@@ -4,7 +4,8 @@ var router = express.Router();
 var fetch = require('node-fetch');
 
 /* GET earthquakes based on user input */
-router.get('/:mag', (req, res, next) => {
+router.get('/:mag/:long/:lat/:max', (req, res, next) => { ///:long/:lat/:maxradius
+	console.log(req.params.mag, req.params.long, req.params.lat, req.params);
 //  /:starttime/:endtime
 	/* 
 	
@@ -24,16 +25,15 @@ router.get('/:mag', (req, res, next) => {
 		maxradiuskm=200
 	*/
 
-	const filtered = `${process.env.BASE_URL}&starttime=2000-01-01&endtime=2020-01-02&minmagnitude=5&minmagnitude=${req.params.mag}&latitude=37&longitude=100&maxradiuskm=200`;
-
+	//console.log(req.param.place);
+	//&longitude=${req.params.long}&latitude${req.params.lat}&maxradiuskm=${maxradius}
+	const filtered = `${process.env.BASE_URL}&minmagnitude=${req.params.mag}&latitude=${req.params.lat}&longitude=${req.params.long}&maxradiuskm=${req.params.max}`; //&latitude=37&longitude=100&maxradiuskm=200
 
     fetch(filtered)
 		.then((response) => {
 			return response.json();
 		})
 		.then((data) => {
-			//console.log(data.slice(0,3));
-			//const sliced = data.slice(0,3);
 			res.send(data);
 		})
 		.catch((err) => {
