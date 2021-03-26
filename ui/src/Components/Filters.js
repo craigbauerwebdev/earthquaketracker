@@ -13,7 +13,7 @@ const Filters = ({
     <div className="filters">
         <div className="filters">
             <div className="row">
-                <div className="col">
+                {/* <div className="col">
                     <select value={places} onChange={(e) => updateFilter(e, "places")} className="form-control">
                         <option value={"All Places"}>All Places</option>
                         {placesFilters.map((place, i) => {
@@ -21,7 +21,7 @@ const Filters = ({
                             return <option key={i} value={place}>{place}</option>
                         })}
                     </select>
-                </div>
+                </div> */}
                 <div className="col">
                     <select value={places} onChange={(e) => updateFilter(e, "magnitude")} className="form-control">
                         <option value={"1"}>All Magnitudes</option>
@@ -30,17 +30,16 @@ const Filters = ({
                             return <option key={i} value={mag}>{mag}</option>
                         })}
                     </select>
-                  </div>
-                {/* <div className="col">
-                    <select value={location} onChange={(e) => sortBy(e, "location")} className="form-control">
-                        <option value="AllLocations">All Locations</option>
-                        {locationFilters.map((loc) => {
-                            //console.log(loc);
-                            return <option key={loc} value={loc}>{loc}</option>
-                        })}
-                    </select>
-                </div> */}
+                </div>
             </div>
+            {/* <div className="row search">
+                <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Search by Place..."
+                    onChange={(e) => updateFilter(e, "search")}
+                    aria-label="Search" />
+            </div> */}
         </div>
     </div>
   )
