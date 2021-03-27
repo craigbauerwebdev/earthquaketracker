@@ -15,11 +15,11 @@ body {
 
 
     .loading-screen {
-        position: fixed;
-        top: 0;
+        position: inline;//fixed;
+        /* top: 0;
         right: 0;
         bottom: 0;
-        left: 0;
+        left: 0; */
         .loader-wrap {
             position: absolute;
             top: 50%;

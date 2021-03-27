@@ -22,11 +22,11 @@ body {
   background-position: center;
   background-attachment: fixed; }
   body .loading-screen {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    position: inline;
+    /* top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0; */
     /* Safari */ }
     body .loading-screen .loader-wrap {
       position: absolute;
@@ -71,3 +71,13 @@ body {
 
 tr {
   border-bottom: 30px transparent solid; }
+
+.results-data {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px #ffffff solid;
+  margin: 30px; }
+
+.filters {
+  padding: 30px; }
+  .filters .loader {
+    text-align: center; }

@@ -1,20 +1,24 @@
 import axios from 'axios';
 import Filters from "./Components/Filters";
 import { formatMag } from "./utils/formatMag";
+import {
+  latitudeFilters,
+  longitudeFilters,
+  maxRadiusFilters,
+} from "././utils/getFilters";
+import Loader from "./Components/GeneralPurpose/Loader";
 import React, {/* useCallback, */ useEffect, useState} from "react";
+import ResultsData from "./Components/ResultsData";
 import Results from "./Components/Results";
 
 const App = () => {
   const [data, setData] = useState(null);
-  //const [placesFilters, setPlacesFilters] = useState(null);
   const [minMagFilters, setMinMagFilters] = useState([]);
-
   const [magnitude, setMagnitude] = useState("1");
-  const [long, setLong] = useState("100");
-  const [lat, setLat] = useState("37");
-  const [maxRadius, setMaxRadius] = useState("2000");
-
-  //const [places, setPlaces] = useState(null);
+  const [long, setLong] = useState("0");
+  const [lat, setLat] = useState("0");
+  const [maxRadius, setMaxRadius] = useState("20000");
+  const [endIndex, setEndIndex] = useState(20);
 
   // Get all data on load for creating filters
   useEffect(() => {
@@ -27,29 +31,41 @@ const App = () => {
 
   // get filtered data based on user input
   useEffect(() => {
-    if (magnitude) {
-      console.log("Magnitude: ", magnitude);
-      axios.get(`/getfiltereddata/${magnitude}/${long}/${lat}/${maxRadius}`) ///${long}/${lat}/${maxRadius}
+      setData([]);
+      setEndIndex(10);
+      axios.get(`/getfiltereddata/${magnitude}/${long}/${lat}/${maxRadius}`)
         .then(res => {
           setData(res.data);
         });
-    }
-  }, [
-    magnitude, 
+  }, [ 
     setMagnitude,
+    setLong,
+    setLat,
+    setMaxRadius,
+    magnitude,
     lat,
     long,
     maxRadius,
   ]);
+
+  const updateEndIndex = () => {
+    setEndIndex(endIndex + 20);
+  }
 
   const updateFilter = (e, filterType) => {
     //console.log(e.target.value, filterType);
     if (filterType === "magnitude") {
       setMagnitude(e.target.value);
     }
-    /* if (filterType === "search") {
-      setPlaces(e.target.value);
-    } */
+    if (filterType === "latitude") {
+      setLat(e.target.value);
+    }
+    if (filterType === "longitude") {
+      setLong(e.target.value);
+    }
+    if (filterType === "maxRadius") {
+      setMaxRadius(e.target.value);
+    }
   }
 
   const getFilters = (data) => {
@@ -61,11 +77,8 @@ const App = () => {
         return null;
       })
       setMinMagFilters([...new Set(mags.sort())]);
-      //setPlacesFilters([...new Set(places)]);
     }
   }
-
-  //console.log(placesFilters);
 
   return data && minMagFilters ? (
     <div className="base">
@@ -73,19 +86,25 @@ const App = () => {
       <Filters 
         data={data.features} 
         minMagFilters={minMagFilters} 
-        //placesFilters={placesFilters}
+        latFilters={latitudeFilters}
+        longFilters={longitudeFilters}
+        maxRadiusFilters={maxRadiusFilters}
+        magnitude={magnitude}
+        lat={lat}
+        long={long}
+        maxRadius={maxRadius}
         updateFilter={updateFilter} />
-      {/* <ResultsData /> */}
-      {data?.features && <h3>Quakes Found: {data?.features.length}</h3>}
-      <Results data={data?.features} />
+      <ResultsData 
+        data={data?.features} 
+      />
+      <Results 
+        data={data?.features} 
+        updateEndIndex={updateEndIndex} 
+        endIndex={endIndex} 
+      />
     </div>
-  ) : (  
-    <div className="loading-screen">
-      <div className="loader-wrap center">
-        <div className="loader"></div>
-        <p>Just a second</p>
-      </div>
-    </div> 
+  ) : ( 
+    <Loader />  
   );
 }
 
