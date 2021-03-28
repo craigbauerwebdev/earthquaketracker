@@ -8,7 +8,6 @@ const Results = ({
   endIndex,
   updateEndIndex
 }) => {
-  //console.log("Data: ", data);
 
   const getResults = (data) => {
     if (data) {
@@ -56,12 +55,17 @@ const Results = ({
           </table>
         </div>
       </div>
-      {/* Check end index with results length */}
       {endIndex < data.length &&
-        <button onClick={updateEndIndex}>Load More</button>
+        <div className="button-wrap">
+          <button onClick={updateEndIndex}>Load More</button>
+        </div>
       }
     </>
-  ) : <p>Loading UI</p>
+  ) : (
+    <div className="ui-loader">
+      <Loader />
+    </div>
+  )
 }
 
 export default Results;

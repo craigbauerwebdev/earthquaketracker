@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// routes
 app.use("/", indexRouter);
 app.use("/getalldata", usersRouter);
 app.use("/getfiltereddata", filterRouter);
@@ -39,5 +40,19 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+//app.use(compression());
+//app.use(morgan('common'));
+
+//production. To serve front end from node app
+var dev = app.get('env') !== "production";
+console.log("dev: ", dev);
+if (!dev) {
+  app.disable('x-powered-by'); //makes it harder
+  app.use(express.static(path.join(__dirname, 'build')));
+  app.get('/api', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
 
 module.exports = app;

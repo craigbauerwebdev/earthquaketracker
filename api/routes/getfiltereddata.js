@@ -4,24 +4,11 @@ var router = express.Router();
 var fetch = require('node-fetch');
 
 /* GET earthquakes based on user input */
-router.get('/:mag/:long/:lat/:max', (req, res, next) => { ///:long/:lat/:maxradius
-	console.log(req.params.mag, req.params.long, req.params.lat, req.params);
-/*
-	### Possible User Set Parameters
-	https://earthquake.usgs.gov/fdsnws/event/1/query?
-		format=geojson&
-		starttime=2000-01-01&
-		endtime=2020-01-02&
-		minmagnitude=5&
-		minmagnitude=1& // check to see for max???
-		latitude=37&
-		longitude=100&
-		maxradiuskm=200
-	*/
+router.get('/:mag/:long/:lat/:max/:start/:end', (req, res, next) => { ///:long/:lat/:maxradius
 
-	const filtered = `${process.env.BASE_URL}&minmagnitude=${req.params.mag}&latitude=${req.params.lat}&longitude=${req.params.long}&maxradiuskm=${req.params.max}`; //&latitude=37&longitude=100&maxradiuskm=200
+	const filteredData = `${process.env.BASE_URL}&minmagnitude=${req.params.mag}&latitude=${req.params.lat}&longitude=${req.params.long}&maxradiuskm=${req.params.max}&starttime=${req.params.start}&endtime=${req.params.end}`; //&latitude=37&longitude=100&maxradiuskm=200
 
-    fetch(filtered)
+    fetch(filteredData)
 		.then((response) => {
 			return response.json();
 		})

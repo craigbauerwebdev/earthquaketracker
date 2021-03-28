@@ -3,10 +3,13 @@
 .quake {
     margin: 30px;
     padding: 30px;
-    background: rgba(0, 0, 0, .3);
-    border: 1px $white solid;
-    
-    
-}tr {
-	    border-bottom: 30px transparent solid;
-    }
+    background: $transparent-bkg;
+    border: 1px $white solid;   
+}
+.button-wrap {
+    text-align: center;
+    padding-bottom: 30px;
+}
+tr {
+	border-bottom: 30px transparent solid;
+}

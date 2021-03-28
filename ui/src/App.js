@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Filters from "./Components/Filters";
 import { formatMag } from "./utils/formatMag";
+import { formatDate } from "./utils/formatDate";
 import {
   latitudeFilters,
   longitudeFilters,
@@ -19,6 +20,8 @@ const App = () => {
   const [lat, setLat] = useState("0");
   const [maxRadius, setMaxRadius] = useState("20000");
   const [endIndex, setEndIndex] = useState(20);
+  const [start, setStart] =useState("1970-1-1");
+  const [end, setEnd] = useState(formatDate(new Date()));
 
   // Get all data on load for creating filters
   useEffect(() => {
@@ -29,11 +32,11 @@ const App = () => {
       });
   }, []);
 
-  // get filtered data based on user input
+  // get filtered data based on user input //     /${start}/${end}
   useEffect(() => {
       setData([]);
       setEndIndex(10);
-      axios.get(`/getfiltereddata/${magnitude}/${long}/${lat}/${maxRadius}`)
+    axios.get(`/getfiltereddata/${magnitude}/${long}/${lat}/${maxRadius}/${start}/${end}`)
         .then(res => {
           setData(res.data);
         });
@@ -42,18 +45,29 @@ const App = () => {
     setLong,
     setLat,
     setMaxRadius,
+    setStart,
+    setEnd,
     magnitude,
     lat,
     long,
     maxRadius,
+    start,
+    end,
   ]);
 
   const updateEndIndex = () => {
     setEndIndex(endIndex + 20);
   }
 
+  const handleStart = (day) => {
+    setStart(formatDate(day));
+  }
+
+  const handleEnd = (day) => {
+    setEnd(formatDate(day));
+  }
+
   const updateFilter = (e, filterType) => {
-    //console.log(e.target.value, filterType);
     if (filterType === "magnitude") {
       setMagnitude(e.target.value);
     }
@@ -93,7 +107,10 @@ const App = () => {
         lat={lat}
         long={long}
         maxRadius={maxRadius}
-        updateFilter={updateFilter} />
+        updateFilter={updateFilter}
+        handleStart={handleStart}
+        handleEnd={handleEnd}
+      />
       <ResultsData 
         data={data?.features} 
       />

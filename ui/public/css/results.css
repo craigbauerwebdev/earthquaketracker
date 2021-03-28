@@ -4,5 +4,9 @@
   background: rgba(0, 0, 0, 0.3);
   border: 1px #ffffff solid; }
 
+.button-wrap {
+  text-align: center;
+  padding-bottom: 30px; }
+
 tr {
   border-bottom: 30px transparent solid; }

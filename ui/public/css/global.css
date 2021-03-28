@@ -1,7 +1,6 @@
 * {
   padding: 0;
-  margin: 0;
-  color: #ffffff; }
+  margin: 0; }
 
 body {
   background: url(../images/earthquake.jpg);
@@ -9,19 +8,17 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed; }
+  body h1, body h2, body h3, body p, body span, body td, body th, body tr {
+    color: #ffffff; }
+  body button {
+    border: 1px #ffffff solid;
+    color: #ffffff;
+    padding: 15px;
+    background: transparent; }
   body .loading-screen {
-    position: inline;
-    /* top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0; */
     /* Safari */ }
     body .loading-screen .loader-wrap {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      -webkit-transform: translate(-50%, -50%);
-      transform: translate(-50%, -50%); }
+      position: relative; }
     body .loading-screen .loader {
       text-align: center;
       border: 12px solid #ffffff;
@@ -50,3 +47,5 @@ body {
     transform: rotate(0deg); }
   100% {
     transform: rotate(360deg); } }
+  body input {
+    padding: 5px; }

@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 .results-data {
-    background: rgba(0, 0, 0, .3);
+    background: $transparent-bkg;
     border: 1px $white solid;
     margin: 30px;
 }
