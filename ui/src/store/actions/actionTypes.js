@@ -1,0 +1,9 @@
+export const SET_DATA = "SET_DATA";
+export const LATITUDE = "LATITUDE";
+export const LONGITUDE = "LONGITUDE";
+export const START_TIME = "START_TIME";
+export const END_TIME = "END_TIME";
+export const MAX_RADIUS = "MAX_RADIUS";
+export const MIN_MAG = "MIN_MAG"
+export const END_INDEX = "END_INDEX";
+export const MAG_FILTERS = "MAG_FILTERS";
