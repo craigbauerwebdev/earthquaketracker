@@ -10,6 +10,9 @@ add a .env file on the root of the api and add this:
 `npm install` then
 `npm start`
 
+## PORTS
+UI - localhost:3000
+API - localhost:9000
 
 
 
