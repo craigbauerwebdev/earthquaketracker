@@ -1,5 +1,6 @@
 import DayPickerInput from 'react-day-picker/DayPickerInput';
 import 'react-day-picker/lib/style.css';
+import PropTypes from "prop-types";
 
 const Filters = ({
     updateFilter, 
@@ -16,12 +17,12 @@ const Filters = ({
 }) => {
 
 const handleDayChangeStart = (day) => {
-    console.log(day);
+    //console.log(day);
     handleStart(day);
 }
 
 const handleDayChangeEnd = (day) => {
-    console.log(day);
+    //console.log(day);
     handleEnd(day);
 }
   
@@ -80,5 +81,28 @@ return (
     </div>
   )
 }
+
+Filters.propTypes = {
+    lat: PropTypes.string.isRequired,
+    long: PropTypes.string.isRequired,
+    maxRadius: PropTypes.string.isRequired,
+    updateFilter: PropTypes.func.isRequired,
+    handleStart: PropTypes.func.isRequired,
+    handleEnd: PropTypes.func.isRequired,
+};
+
+Filters.defaultProps = {
+    updateFilter: ()=>{},
+    handleStart: () => { },
+    handleEnd: () => { },
+    minMagFilters: [],
+    latFilters: [],
+    longFilters: [],
+    maxRadiusFilters: [],
+    magnitude: "1",
+    lat: "0",
+    long: "0",
+    maxRadius: "20000",
+};
 
 export default Filters;

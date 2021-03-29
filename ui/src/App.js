@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Filters from "./Components/Filters";
+import ErrorBoundary from "./Components/GeneralPurpose/ErrorBoundary"
 import { formatMag } from "./utils/formatMag";
 import { formatDate } from "./utils/formatDate";
 import {
@@ -53,6 +54,9 @@ const App = () => {
       .then(res => {
         dispatch(setData(res.data))
         getFilters(res.data);
+      })
+      .catch(function (error) {
+        alert(error);
       });
   }, [dispatch]);
 
@@ -63,6 +67,9 @@ const App = () => {
     axios.get(`/getfiltereddata/${magnitude}/${long}/${lat}/${maxRadius}/${start}/${end}`)
         .then(res => {
           dispatch(setData(res.data));
+        })
+        .catch(function (error) {
+          alert(error);
         });
   }, [ 
     dispatch,
@@ -105,31 +112,39 @@ const App = () => {
     }
   }
 
-  return data && minMagFilters ? (
+  return data ? (
     <div className="base">
       <h1>Earthquake Tracker</h1>
-      <Filters 
-        data={data.features} 
-        minMagFilters={minMagFilters} 
-        latFilters={latitudeFilters}
-        longFilters={longitudeFilters}
-        maxRadiusFilters={maxRadiusFilters}
-        magnitude={magnitude}
-        lat={lat}
-        long={long}
-        maxRadius={maxRadius}
-        updateFilter={updateFilter}
-        handleStart={handleStart}
-        handleEnd={handleEnd}
-      />
-      <ResultsData 
-        data={data?.features} 
-      />
-      <Results 
-        data={data?.features} 
-        updateEndIndex={updateEndIndex} 
-        endIndex={endIndex} 
-      />
+      <ErrorBoundary>
+        <Filters 
+          data={data.features} 
+          minMagFilters={minMagFilters} 
+          latFilters={latitudeFilters}
+          longFilters={longitudeFilters}
+          maxRadiusFilters={maxRadiusFilters}
+          magnitude={magnitude}
+          lat={lat}
+          long={long}
+          maxRadius={maxRadius}
+          updateFilter={updateFilter}
+          handleStart={handleStart}
+          handleEnd={handleEnd}
+        />
+      </ErrorBoundary>
+
+      <ErrorBoundary>
+        <ResultsData 
+          data={data?.features} 
+        />
+      </ErrorBoundary>
+
+      <ErrorBoundary>
+        <Results 
+          data={data?.features} 
+          updateEndIndex={updateEndIndex} 
+          endIndex={endIndex} 
+        />
+      </ErrorBoundary>
     </div>
   ) : ( 
     <Loader />  
